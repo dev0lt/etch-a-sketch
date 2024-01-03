@@ -10,8 +10,8 @@ body {
 }
 
 .wrapper {
-  width: 900px;
-  height: 900px;
+  width: 640px;
+  height: 640px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,5 +20,10 @@ body {
 }
 
 .grid {
-  background-color: rgb(139, 139, 227);
+  /* box-sizing: border-box;
+  border: 1px solid black; */
+}
+
+.btn {
+  visibility: hidden;
 }

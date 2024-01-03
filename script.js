@@ -3,6 +3,8 @@
 const wrapper = document.querySelector(".wrapper");
 const container = document.querySelector(".container");
 const btn = document.querySelector(".btn");
+const reset = document.querySelector(".reset");
+const slider = document.querySelector(".slider");
 
 ////////// create grid of boxes //////////////////
 
@@ -23,20 +25,52 @@ function createGrid(num) {
       const grid = document.createElement("div");
       grid.classList.add("grid");
 
-      grid.style.setProperty("height", `calc(900px / ${containerAll.length})`);
+      grid.style.setProperty("height", `calc(640px / ${containerAll.length})`);
 
-      grid.style.setProperty("width", `calc(900px / ${containerAll.length})`);
+      grid.style.setProperty("width", `calc(640px / ${containerAll.length})`);
 
       let box = grid.cloneNode();
       el.appendChild(box);
     }
   });
 }
-
-//////////// button click //////////////
-
 let gridAll;
 
+/////////// slider - instead of button //////////////
+
+createGrid(slider.value);
+
+slider.oninput = function () {
+  while (wrapper.firstChild) {
+    wrapper.removeChild(wrapper.firstChild);
+  }
+  createGrid(slider.value);
+  return (gridAll = document.querySelectorAll(".grid"));
+};
+
+//////////// disable button //////////////////
+
+reset.addEventListener("click", function () {
+  while (wrapper.firstChild) {
+    wrapper.removeChild(wrapper.firstChild);
+  }
+
+  createGrid(slider.value);
+
+  // option if button is available
+  // btn.disabled = !btn.disabled;
+});
+
+/////////// box coloring event ///////////////////////
+
+wrapper.addEventListener("mouseover", (e) => {
+  if (e.target === wrapper) return;
+  e.target.style.setProperty("background-color", "black");
+});
+
+//////////// button click - CHANGED TO SLIDER //////////////
+
+/*
 btn.addEventListener("click", function () {
   let x = prompt("enter number of squares per side:");
 
@@ -50,18 +84,4 @@ btn.addEventListener("click", function () {
   createGrid(x);
   return (gridAll = document.querySelectorAll(".grid"));
 });
-
-/////////// box coloring event ///////////////////////
-
-wrapper.addEventListener("mouseover", (e) => {
-  if (e.target === wrapper) return;
-  e.target.style.setProperty("background-color", "black");
-
-  // console.log(e.target);
-  // if (!gridAll) return;
-
-  // gridAll.forEach((x) => {
-  //   console.log(x);
-  //   x.style.setProperty("background-color", "black");
-  // });
-});
+*/
