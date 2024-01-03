@@ -1,6 +1,6 @@
 body {
   box-sizing: border-box;
-  height: auto;
+  height: 100svh;
   margin: 0;
   padding: 0;
   display: flex;
@@ -19,11 +19,6 @@ body {
   border: 1px solid black;
 }
 
-.container {
-  /* margin: 0 1px; */
-}
-
 .grid {
-  /* margin: 1px 0; */
   background-color: rgb(139, 139, 227);
 }

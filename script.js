@@ -1,13 +1,10 @@
 "use strict";
 
+const wrapper = document.querySelector(".wrapper");
 const container = document.querySelector(".container");
 const btn = document.querySelector(".btn");
 
-const grid = document.createElement("div");
-
-const wrapper = document.querySelector(".wrapper");
-
-grid.classList.add("grid");
+////////// create grid of boxes //////////////////
 
 function createGrid(num) {
   function gridColumn(num) {
@@ -22,7 +19,14 @@ function createGrid(num) {
   const containerAll = document.querySelectorAll(".container");
 
   containerAll.forEach((el) => {
-    for (let i = 1; i <= num; i++) {
+    for (let i = 1; i <= containerAll.length; i++) {
+      const grid = document.createElement("div");
+      grid.classList.add("grid");
+
+      grid.style.setProperty("height", `calc(900px / ${containerAll.length})`);
+
+      grid.style.setProperty("width", `calc(900px / ${containerAll.length})`);
+
       let box = grid.cloneNode();
       el.appendChild(box);
     }
@@ -30,6 +34,8 @@ function createGrid(num) {
 }
 
 //////////// button click //////////////
+
+let gridAll;
 
 btn.addEventListener("click", function () {
   let x = prompt("enter number of squares per side:");
@@ -42,6 +48,20 @@ btn.addEventListener("click", function () {
   }
 
   createGrid(x);
-  grid.style.width = "10px";
-  grid.style.height = "10px";
+  return (gridAll = document.querySelectorAll(".grid"));
+});
+
+/////////// box coloring event ///////////////////////
+
+wrapper.addEventListener("mouseover", (e) => {
+  if (e.target === wrapper) return;
+  e.target.style.setProperty("background-color", "black");
+
+  // console.log(e.target);
+  // if (!gridAll) return;
+
+  // gridAll.forEach((x) => {
+  //   console.log(x);
+  //   x.style.setProperty("background-color", "black");
+  // });
 });
