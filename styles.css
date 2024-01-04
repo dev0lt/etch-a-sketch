@@ -8,6 +8,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: antiquewhite;
+  font-family: "DotGothic16", sans-serif;
 }
 
 .wrapper {
@@ -23,6 +24,66 @@ body {
   margin-right: 20px;
 }
 
+/* change size */
+
+.size {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.sizeIndicator {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.slider {
+  height: 10px;
+  appearance: none;
+  cursor: pointer;
+  background: transparent;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: black;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: black;
+  cursor: pointer;
+}
+
+/* buttons */
+
+.btn {
+  font-family: "DotGothic16", sans-serif;
+  font-size: 1.5rem;
+  background-color: transparent;
+  cursor: pointer;
+  border: 2px solid black;
+  transition: 0.1s;
+  padding: 10px;
+}
+
+.btn:hover {
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+}
+
 .canvas {
   width: 640px;
   height: 640px;
@@ -35,10 +96,11 @@ body {
 }
 
 .grid {
-  box-sizing: border-box;
-  border: 1px solid white;
+  transition: background-color 0.2s;
+  /* box-sizing: border-box;
+  border: 1px solid white; */
 }
 
-.btn {
+.cta {
   visibility: hidden;
 }

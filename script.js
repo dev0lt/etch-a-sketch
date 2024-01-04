@@ -2,10 +2,11 @@
 
 const canvas = document.querySelector(".canvas");
 const container = document.querySelector(".container");
-const btn = document.querySelector(".btn");
+const cta = document.querySelector(".cta");
 const reset = document.querySelector(".reset");
 const slider = document.querySelector(".slider");
 const btnRgb = document.querySelector(".btnRgb");
+const sizeIndicator = document.querySelector(".sizeIndicator");
 
 ////////// create grid of boxes //////////////////
 
@@ -45,7 +46,12 @@ slider.onchange = function () {
     canvas.removeChild(canvas.firstChild);
   }
   createGrid(slider.value);
-  return (gridAll = document.querySelectorAll(".grid"));
+
+  // return (gridAll = document.querySelectorAll(".grid"));
+};
+
+slider.oninput = function () {
+  sizeIndicator.textContent = `${slider.value}x${slider.value}`;
 };
 
 //////////// disable button //////////////////
@@ -58,7 +64,7 @@ reset.addEventListener("click", function () {
   createGrid(slider.value);
 
   // option if button is available
-  // btn.disabled = !btn.disabled;
+  // cta.disabled = !cta.disabled;
 });
 
 /////////// color black - click event ///////////////////////
@@ -71,7 +77,7 @@ function colorBlck() {
 }
 colorBlck();
 
-///////////// rgb toggle button //////////////////
+///////////// color rgb - click event //////////////////
 
 function colorRgb() {
   const rgb = document.querySelector(".rgb");
@@ -84,6 +90,8 @@ function colorRgb() {
   });
 }
 
+//////////// toggle button /////////////////
+
 btnRgb.addEventListener("click", function () {
   canvas.classList.toggle("rgb");
 
@@ -95,7 +103,7 @@ btnRgb.addEventListener("click", function () {
 //////////// button click - CHANGED TO SLIDER //////////////
 
 /*
-btn.addEventListener("click", function () {
+cta.addEventListener("click", function () {
   let x = prompt("enter number of squares per side:");
 
   if (!x) return;
