@@ -1,10 +1,11 @@
 "use strict";
 
-const wrapper = document.querySelector(".wrapper");
+const canvas = document.querySelector(".canvas");
 const container = document.querySelector(".container");
 const btn = document.querySelector(".btn");
 const reset = document.querySelector(".reset");
 const slider = document.querySelector(".slider");
+const btnRgb = document.querySelector(".btnRgb");
 
 ////////// create grid of boxes //////////////////
 
@@ -12,7 +13,7 @@ function createGrid(num) {
   function gridColumn(num) {
     for (let i = 1; i <= num; i++) {
       let row = container.cloneNode();
-      wrapper.appendChild(row);
+      canvas.appendChild(row);
     }
   }
 
@@ -34,15 +35,14 @@ function createGrid(num) {
     }
   });
 }
-let gridAll;
 
 /////////// slider - instead of button //////////////
 
 createGrid(slider.value);
 
-slider.oninput = function () {
-  while (wrapper.firstChild) {
-    wrapper.removeChild(wrapper.firstChild);
+slider.onchange = function () {
+  while (canvas.firstChild) {
+    canvas.removeChild(canvas.firstChild);
   }
   createGrid(slider.value);
   return (gridAll = document.querySelectorAll(".grid"));
@@ -51,8 +51,8 @@ slider.oninput = function () {
 //////////// disable button //////////////////
 
 reset.addEventListener("click", function () {
-  while (wrapper.firstChild) {
-    wrapper.removeChild(wrapper.firstChild);
+  while (canvas.firstChild) {
+    canvas.removeChild(canvas.firstChild);
   }
 
   createGrid(slider.value);
@@ -61,11 +61,35 @@ reset.addEventListener("click", function () {
   // btn.disabled = !btn.disabled;
 });
 
-/////////// box coloring event ///////////////////////
+/////////// color black - click event ///////////////////////
 
-wrapper.addEventListener("mouseover", (e) => {
-  if (e.target === wrapper) return;
-  e.target.style.setProperty("background-color", "black");
+function colorBlck() {
+  canvas.addEventListener("mouseover", (e) => {
+    if (e.target === canvas) return;
+    e.target.style.setProperty("background-color", "black");
+  });
+}
+colorBlck();
+
+///////////// rgb toggle button //////////////////
+
+function colorRgb() {
+  const rgb = document.querySelector(".rgb");
+  rgb.addEventListener("mouseover", (e) => {
+    if (e.target === canvas) return;
+    e.target.style.setProperty(
+      "background-color",
+      `#${Math.floor(Math.random() * 16777215).toString(16)}`
+    );
+  });
+}
+
+btnRgb.addEventListener("click", function () {
+  canvas.classList.toggle("rgb");
+
+  if (!canvas.classList.contains("rgb")) colorBlck();
+
+  if (canvas.classList.contains("rgb")) colorRgb();
 });
 
 //////////// button click - CHANGED TO SLIDER //////////////
@@ -77,8 +101,8 @@ btn.addEventListener("click", function () {
   if (!x) return;
   if (x > 100) return alert("too much! can't be more than 100");
 
-  while (wrapper.firstChild) {
-    wrapper.removeChild(wrapper.firstChild);
+  while (canvas.firstChild) {
+    canvas.removeChild(canvas.firstChild);
   }
 
   createGrid(x);

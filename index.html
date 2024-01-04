@@ -10,11 +10,23 @@
   <body>
     <button class="btn">Click</button>
     <div class="wrapper">
-      <div class="container"></div>
-    </div>
-    <button class="reset">reset</button>
-    <div class="slidecontainer">
-      <input type="range" min="16" max="100" value="16" class="slider" />
+      <div class="controls">
+        <button class="btnRgb">RGB</button>
+        <div class="slidecontainer">
+          <input
+            type="range"
+            min="16"
+            max="106"
+            value="16"
+            step="10"
+            class="slider"
+          />
+        </div>
+        <button class="reset">reset</button>
+      </div>
+      <div class="canvas">
+        <div class="container"></div>
+      </div>
     </div>
   </body>
 </html>
