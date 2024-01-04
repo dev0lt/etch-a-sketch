@@ -97,6 +97,7 @@ body {
 
 .grid {
   transition: background-color 0.2s;
+  user-select: none;
   /* box-sizing: border-box;
   border: 1px solid white; */
 }

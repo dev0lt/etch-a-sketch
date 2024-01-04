@@ -8,6 +8,10 @@ const slider = document.querySelector(".slider");
 const btnRgb = document.querySelector(".btnRgb");
 const sizeIndicator = document.querySelector(".sizeIndicator");
 
+let mouseDown = false;
+document.body.onmousedown = () => (mouseDown = true);
+document.body.onmouseup = () => (mouseDown = false);
+
 ////////// create grid of boxes //////////////////
 
 function createGrid(num) {
@@ -32,6 +36,8 @@ function createGrid(num) {
       grid.style.setProperty("width", `calc(640px / ${containerAll.length})`);
 
       let box = grid.cloneNode();
+      box.addEventListener("mouseover", coloring);
+      box.addEventListener("mousedown", coloring);
       el.appendChild(box);
     }
   });
@@ -67,6 +73,12 @@ reset.addEventListener("click", function () {
   // cta.disabled = !cta.disabled;
 });
 
+function coloring(e) {
+  console.log(e.target);
+  if (e.type === "mouseover" && !mouseDown) return;
+  e.target.style.setProperty("background-color", "black");
+}
+
 /////////// color black - click event ///////////////////////
 
 function colorBlck() {
@@ -75,7 +87,7 @@ function colorBlck() {
     e.target.style.setProperty("background-color", "black");
   });
 }
-colorBlck();
+// colorBlck();
 
 ///////////// color rgb - click event //////////////////
 
