@@ -55,6 +55,7 @@ body {
   border-radius: 50%;
   background: black;
   cursor: pointer;
+  transition: 0.05s;
 }
 
 .slider::-moz-range-thumb {
@@ -64,6 +65,13 @@ body {
   border-radius: 50%;
   background: black;
   cursor: pointer;
+  transition: 0.05s;
+}
+
+.slider::-webkit-slider-thumb:active {
+  width: 30px;
+  height: 30px;
+  transition: 0.05s;
 }
 
 /* buttons */
@@ -71,17 +79,23 @@ body {
 .btn {
   font-family: "DotGothic16", sans-serif;
   font-size: 1.5rem;
-  background-color: transparent;
+  background-color: antiquewhite;
   cursor: pointer;
   border: 2px solid black;
-  transition: 0.1s;
+  transition: 0.05s;
   padding: 10px;
+  filter: drop-shadow(5px 5px black);
 }
 
 .btn:hover {
   background-color: black;
   color: white;
   border: 2px solid white;
+}
+
+.btn:active {
+  transform: translate(5px, 5px);
+  filter: drop-shadow(0px 0px black);
 }
 
 .canvas {
@@ -93,15 +107,12 @@ body {
   padding: 1px;
   border: 1px solid black;
   background-color: white;
+  filter: drop-shadow(10px 10px);
 }
 
 .grid {
   transition: background-color 0.2s;
   user-select: none;
   /* box-sizing: border-box;
-  border: 1px solid white; */
-}
-
-.cta {
-  visibility: hidden;
+  border: 0.5px solid rgb(175, 175, 175); */
 }
