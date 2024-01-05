@@ -3,6 +3,7 @@
 const canvas = document.querySelector(".canvas");
 const container = document.querySelector(".container");
 const cta = document.querySelector(".cta");
+cta.remove();
 const reset = document.querySelector(".reset");
 const slider = document.querySelector(".slider");
 const btnRgb = document.querySelector(".btnRgb");
@@ -11,6 +12,8 @@ const sizeIndicator = document.querySelector(".sizeIndicator");
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
+
+let drawingColor = "black";
 
 ////////// create grid of boxes //////////////////
 
@@ -36,8 +39,8 @@ function createGrid(num) {
       grid.style.setProperty("width", `calc(640px / ${containerAll.length})`);
 
       let box = grid.cloneNode();
-      box.addEventListener("mouseover", coloring);
-      box.addEventListener("mousedown", coloring);
+      box.addEventListener("mouseover", drawing);
+      box.addEventListener("mousedown", drawing);
       el.appendChild(box);
     }
   });
@@ -52,8 +55,6 @@ slider.onchange = function () {
     canvas.removeChild(canvas.firstChild);
   }
   createGrid(slider.value);
-
-  // return (gridAll = document.querySelectorAll(".grid"));
 };
 
 slider.oninput = function () {
@@ -73,33 +74,19 @@ reset.addEventListener("click", function () {
   // cta.disabled = !cta.disabled;
 });
 
-function coloring(e) {
-  console.log(e.target);
+////////////// drawing - 2 modes in one function /////////////////
+
+function drawing(e) {
   if (e.type === "mouseover" && !mouseDown) return;
-  e.target.style.setProperty("background-color", "black");
-}
 
-/////////// color black - click event ///////////////////////
-
-function colorBlck() {
-  canvas.addEventListener("mouseover", (e) => {
-    if (e.target === canvas) return;
+  if (drawingColor === "black") {
     e.target.style.setProperty("background-color", "black");
-  });
-}
-// colorBlck();
-
-///////////// color rgb - click event //////////////////
-
-function colorRgb() {
-  const rgb = document.querySelector(".rgb");
-  rgb.addEventListener("mouseover", (e) => {
-    if (e.target === canvas) return;
+  } else if (drawingColor === "rgb") {
     e.target.style.setProperty(
       "background-color",
       `#${Math.floor(Math.random() * 16777215).toString(16)}`
     );
-  });
+  }
 }
 
 //////////// toggle button /////////////////
@@ -107,10 +94,36 @@ function colorRgb() {
 btnRgb.addEventListener("click", function () {
   canvas.classList.toggle("rgb");
 
-  if (!canvas.classList.contains("rgb")) colorBlck();
+  if (!canvas.classList.contains("rgb")) {
+    drawingColor = "black";
+  }
 
-  if (canvas.classList.contains("rgb")) colorRgb();
+  if (canvas.classList.contains("rgb")) {
+    drawingColor = "rgb";
+  }
 });
+
+/////////// color black - click event ///////////////////////
+
+// function colorBlck() {
+//   canvas.addEventListener("mouseover", (e) => {
+//     if (e.target === canvas) return;
+//     e.target.style.setProperty("background-color", "black");
+//   });
+// }
+// colorBlck();
+
+///////////// color rgb - click event //////////////////
+
+// function colorRgb() {
+//   canvas.addEventListener("mouseover", (e) => {
+//     if (e.target === canvas) return;
+//     e.target.style.setProperty(
+//       "background-color",
+//       `#${Math.floor(Math.random() * 16777215).toString(16)}`
+//     );
+//   });
+// }
 
 //////////// button click - CHANGED TO SLIDER //////////////
 
@@ -126,6 +139,5 @@ cta.addEventListener("click", function () {
   }
 
   createGrid(x);
-  return (gridAll = document.querySelectorAll(".grid"));
 });
 */
